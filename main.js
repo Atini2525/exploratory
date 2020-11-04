@@ -27,7 +27,7 @@
            .defer(d3.json,"usState.json")
            .await(ready)*/
            Promise.all([
-               d3.json("world3.json"),d3.csv("happinessbycountry.csv"),  // pull a new file in promises 
+               d3.json("world3.json"),d3.csv("happinessbycountry.csv")  // pull a new file in promises 
            ]).then( ([datageojson,datahappy])=>{ // it returns an object 
             var countries = topojson.feature(datageojson,datageojson.objects.countries).features;
             console.log(countries)
