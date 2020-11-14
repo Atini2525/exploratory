@@ -65,8 +65,9 @@ var countryById = d3.map();
             
              console.log(data2);
             // colorScale.domain(d3.extent(data2, function(d) {return d.data2;}));
-             colorScale.domain([d3.min(data2), d3.max(data2)]);
-            var zoom = d3.zoom();
+             colorScale.domain([d3.min(data2), d3.max(data2)]); // color scale since my data is an array and not an object, I used Min and max
+
+            var zoom = d3.zoom(); // for the zoom 
             svg=d3.select("#map")
             .append("svg")
             .attr("height",height  )
@@ -99,8 +100,8 @@ var countryById = d3.map();
             svg.selectAll('path')
          // .on("mouseover", handleMouseover1) ;  
        //  svg.selectAll('path')
-         .on("mouseover", tip.show)
-         .attr('fill', function(d,i) {
+         .on("mouseover", tip.show) // for the tooltip
+         .attr('fill', function(d,i) {  // color of the map depending of the size
           //console.log(d.Ladder_score);
           return getColor(d);
       })		
@@ -108,10 +109,10 @@ var countryById = d3.map();
          
              /*.on("mouseover", function(d, i) {
               tip.show(d);
-              //eporter1(d) ;               
+              //reporter1(d) ;               
                               });*/
   
-                function reporter1(x) {
+                function reporter1(x) { // my first try of tooltip 
                        console.log(x)
             state.datahappy.forEach(function(d, i) {
               state.datageojson.forEach(function(e, j) {
@@ -163,52 +164,16 @@ var countryById = d3.map();
      
       }
 
-   
-              
-
-              
-         /*  let  handleMouseover1= 
-              function  handleMouseover(x)
-                {
-                  state.datahappy.forEach(function(d, i) {
-                    state.datageojson.forEach(function(e, j) {
-      
-                   if (d.id === e.id) {
-                console.log(d.id)
-                console.log(e.id)
-                 e.name = d.name
-                 e.Ladder_score=d.Ladder_score
-                
-                 
-                   }
-                  })
-                  console.log(x.name);
-                  console.log(x.Ladder_score);
-                
-                })
-               console.log([x.name,x.Ladder_score]);
-             
-               d3.select(this)
-               .transition()
-               .duration(200)
-               .style("opacity", 1)
-               .style("stroke", "black")
-               .style('fill',"white")
-               
-          
-             
-                } */
- 
 
 
-             var tip = d3.tip()
+             var tip = d3.tip()  // tooltip 
              .attr('class', 'd3-tip')
              .offset([-5, 0])
              .html(function(d) {
-              state.datahappy.forEach(function(f, i) {
-                state.datageojson.forEach(function(e, j) {
-  
-               if (f.id === e.id) {
+              state.datahappy.forEach(function(f, i) { // I found only this solution to match json and csv
+                state.datageojson.forEach(function(e, j) { // it tooks me around 3 days to figure out it 
+                                                          // but I am sure there is a better solution 
+               if (f.id === e.id) {                      // I did not know how to declare this function and use it repeatdely
             console.log(f.id)
             console.log(e.id)
              e.name = f.name
@@ -216,7 +181,7 @@ var countryById = d3.map();
                }
               })
             })
-            return d.name + ": " + d.Ladder_score;
+            return d.name + ": " + d.Ladder_score; // data return 
              });
 
              
